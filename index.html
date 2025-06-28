@@ -2,7 +2,24 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>nekosnekos.com</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>nekosnekos.com - just cats</title>
+  <meta name="description" content="everytime u refresh, a cat appears, thats it" />
+  <meta name="keywords" content="random cats, neko, neko site, cat image, useless website, fun web toy" />
+  <meta name="author" content="nekosnekos.com" />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:title" content="nekosnekos.com — random cats on refresh" />
+  <meta property="og:description" content="everytime u refresh, a cat appears, thats it" />
+  <meta property="og:image" content="https://nekosnekos.com/preview.gif" />
+  <meta property="og:url" content="https://nekosnekos.com/" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="nekosnekos.com" />
+  <meta name="twitter:description" content="everytime u refresh, a cat appears, thats it" />
+  <meta name="twitter:image" content="https://nekosnekos.com/preview.png" />
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="canonical" href="https://nekosnekos.com/" />
+
   <style>
     html, body {
       height: 100%;
@@ -21,7 +38,7 @@
     }
 
     #mascot {
-      width: 240px; /* increased from 180 */
+      width: 240px;
       height: auto;
       margin-bottom: 8px;
     }
@@ -34,7 +51,7 @@
     }
 
     #cat-container {
-      width: 420px; /* increased from 300 */
+      width: 420px;
       height: 420px;
       border-radius: 16px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
@@ -59,21 +76,26 @@
   </style>
 </head>
 <body>
-  <img id="mascot" src="mascot.png" alt="site mascot" />
-  <img id="title-img" src="title.png" alt="nekosnekos.com title" />
+  <img id="mascot" src="mascot.png" alt="Cute neko mascot" />
+  <img id="title-img" src="title.png" alt="nekosnekos.com logo" />
+
   <div id="cat-container">
-    <img id="cat" src="" alt="a neko has appeared.." />
+    <img id="cat" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="a neko has appeared.." />
   </div>
+
   <div class="refresh-note">refresh the page to meet a new neko.</div>
 
   <script>
     const catImg = document.getElementById("cat");
-    catImg.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
-
     fetch("https://api.thecatapi.com/v1/images/search")
       .then(res => res.json())
       .then(data => {
         catImg.src = data[0].url;
+        catImg.alt = "random neko image";
+      })
+      .catch(err => {
+        console.error("failed to fetch cat:", err);
+        catImg.alt = "failed to load neko :(";
       });
   </script>
 </body>
